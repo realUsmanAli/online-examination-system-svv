@@ -1,0 +1,36 @@
+types 
+Student :: id : nat 
+name : seq of char; 
+Exam :: examId : nat 
+title : seq of char; 
+LOGIN FUNCTION 
+functions 
+login : Student ==> bool 
+login(s) == true 
+pre s.id > 0 
+post RESULT = true; 
+START EXAM FUNCTION 
+functions 
+startExam : Student * Exam ==> bool 
+startExam(s,e) == true 
+pre s.id > 0 
+post RESULT = true; 
+SUBMIT EXAM FUNCTION 
+functions 
+submitExam : Student * Exam ==> bool 
+submitExam(s,e) == true 
+pre s.id > 0 
+post RESULT = true; 
+LOGOUT FUNCTION 
+functions 
+logout : Student ==> bool 
+logout(s) == 
+true 
+pre s.id > 0 
+post RESULT = true; 
+RESULT FUNCTION 
+functions 
+calculateResult : nat * nat ==> real 
+calculateResult(correct,total) == (correct * 100) / total 
+pre total > 0 
+post RESULT >= 0;

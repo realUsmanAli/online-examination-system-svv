@@ -1,0 +1,68 @@
+[STUDENT]
+
+STATUS ::= LoggedOut | ExamActive | Submitted
+
+OnlineExam
+students : ℙ STUDENT
+submitted : ℙ STUDENT
+status : STUDENT \pfun STATUS
+
+submitted ⊆ students
+∀ s : STUDENT | s ∈ submitted ⇒ status(s) = Submitted
+∀ s : STUDENT | s ∈ students \ submitted ⇒ status(s) = ExamActive
+
+Login
+ΔOnlineExam
+s? : STUDENT
+
+s? ∈ students
+
+status' = status ⊕ {s? ↦ ExamActive}
+
+students' = students
+submitted' = submitted
+
+StartExam
+ΔOnlineExam
+s? : STUDENT
+
+s? ∈ students
+s? ∉ submitted
+
+status' = status ⊕ {s? ↦ ExamActive}
+
+students' = students
+submitted' = submitted
+
+SubmitExam
+ΔOnlineExam
+s? : STUDENT
+
+s? ∈ students
+s? ∉ submitted
+
+submitted' = submitted ∪ {s?}
+
+status' = status ⊕ {s? ↦ Submitted}
+
+students' = students
+
+Logout
+ΔOnlineExam
+s? : STUDENT
+
+s? ∈ students
+
+status' = status ⊕ {s? ↦ LoggedOut}
+
+students' = students
+submitted' = submitted
+
+% INVARIANT 1
+% Student can submit only once.
+∀ s : STUDENT •
+s ∈ submitted ⇒ status(s) = Submitted
+% INVARIANT 2
+% Submitted student cannot attempt exam again.
+∀ s : STUDENT •
+s ∈ submitted ⇒ s ∉ dom status ▷ {ExamActive}
