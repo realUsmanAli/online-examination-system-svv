@@ -1,36 +1,133 @@
-types 
-Student :: id : nat 
-name : seq of char; 
-Exam :: examId : nat 
-title : seq of char; 
-LOGIN FUNCTION 
-functions 
-login : Student ==> bool 
-login(s) == true 
-pre s.id > 0 
-post RESULT = true; 
-START EXAM FUNCTION 
-functions 
-startExam : Student * Exam ==> bool 
-startExam(s,e) == true 
-pre s.id > 0 
-post RESULT = true; 
-SUBMIT EXAM FUNCTION 
-functions 
-submitExam : Student * Exam ==> bool 
-submitExam(s,e) == true 
-pre s.id > 0 
-post RESULT = true; 
-LOGOUT FUNCTION 
-functions 
-logout : Student ==> bool 
-logout(s) == 
-true 
-pre s.id > 0 
-post RESULT = true; 
-RESULT FUNCTION 
-functions 
-calculateResult : nat * nat ==> real 
-calculateResult(correct,total) == (correct * 100) / total 
-pre total > 0 
+-- ==========================================
+-- DATA TYPE DEFINITIONS
+-- ==========================================
+
+types
+
+-- Student record structure
+Student :: 
+    id : nat                 -- Stores student ID (natural number)
+    name : seq of char;      -- Stores student name as character sequence
+
+-- Exam record structure
+Exam :: 
+    examId : nat             -- Stores exam ID
+    title : seq of char;     -- Stores exam title
+
+
+
+-- ==========================================
+-- LOGIN FUNCTION
+-- ==========================================
+
+functions
+
+-- Function accepts Student object and returns Boolean
+login : Student ==> bool
+
+-- Function body
+login(s) == true
+
+-- Precondition:
+-- Student ID must be greater than 0
+pre s.id > 0
+
+-- Postcondition:
+-- Function should return true after successful login
+post RESULT = true;
+
+
+
+-- ==========================================
+-- START EXAM FUNCTION
+-- ==========================================
+
+functions
+
+-- Function accepts Student and Exam
+-- Returns Boolean value
+startExam : Student * Exam ==> bool
+
+-- Function body
+startExam(s,e) == true
+
+-- Precondition:
+-- Student must have valid ID
+pre s.id > 0
+
+-- Postcondition:
+-- Function returns true if exam starts successfully
+post RESULT = true;
+
+
+
+-- ==========================================
+-- SUBMIT EXAM FUNCTION
+-- ==========================================
+
+functions
+
+-- Function accepts Student and Exam
+-- Returns Boolean
+submitExam : Student * Exam ==> bool
+
+-- Function body
+submitExam(s,e) == true
+
+-- Precondition:
+-- Student ID should be valid
+pre s.id > 0
+
+-- Postcondition:
+-- Function returns true after successful submission
+post RESULT = true;
+
+
+
+-- ==========================================
+-- LOGOUT FUNCTION
+-- ==========================================
+
+functions
+
+-- Function accepts Student
+-- Returns Boolean value
+logout : Student ==> bool
+
+-- Function body
+logout(s) == true
+
+-- Precondition:
+-- Student must be valid
+pre s.id > 0
+
+-- Postcondition:
+-- Logout should complete successfully
+post RESULT = true;
+
+
+
+-- ==========================================
+-- RESULT CALCULATION FUNCTION
+-- ==========================================
+
+functions
+
+-- Function accepts:
+-- correct = number of correct answers
+-- total = total questions
+-- Returns percentage score
+
+calculateResult : nat * nat ==> real
+
+-- Formula for result calculation
+calculateResult(correct,total) ==
+    (correct * 100) / total
+
+-- Precondition:
+-- Total questions cannot be zero
+pre total > 0
+
+-- Postcondition:
+-- Result percentage cannot be negative
 post RESULT >= 0;
