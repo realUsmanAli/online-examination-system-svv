@@ -1,1 +1,63 @@
 
+name: SVV CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  validation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+
+    - name: Display Project Structure
+      run: |
+        echo "SVV Project Structure"
+        ls -R
+
+
+    - name: Verify Requirements Folder
+      run: |
+        test -d requirements
+
+
+    - name: Verify Z Model Folder
+      run: |
+        test -d z-model
+
+
+    - name: Verify VDM Specification Folder
+      run: |
+        test -d vdm-spec
+
+
+    - name: Verify Alloy Model Folder
+      run: |
+        test -d alloy-model
+
+
+    - name: Verify Validation Folder
+      run: |
+        test -d validation
+
+
+    - name: Check README File
+      run: |
+        test -f README.md
+
+
+    - name: Display Success Message
+      run: |
+        echo "SVV Validation Pipeline Passed Successfully"
